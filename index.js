@@ -1,5 +1,4 @@
 const express=require("express");
-
 const app=express();
 const fs=require("fs")
 const path=require("path")
@@ -26,8 +25,9 @@ var storage = multer.diskStorage({
         cb(null, file.originalname + '-' + Date.now())
     }
 });
-  
-var upload = multer({ storage: storage });
+  const maxSize=50*1024;
+var upload = multer({ storage: storage,
+limits:{fileSize:maxSize} });
 // parse application/json
 app.use(bodyParser.json())
 const PostModel=require("./Models/post")
@@ -49,9 +49,14 @@ app.get("/api/v1/post",cors(),async ( req , res)=>{
 
 app.post("/api/v1/createpost",upload.single('postImage'),cors(), async (req,res)=>{
 try{
+    // upload(req,res,function (err){
+    //     if(err instanceof multer.MulterError){
+    //       return res.send(err)
+    //     }else if(err){
+    //         return res.send(err)
+    //     }
+    // })
 console.log(req.body,req.file)
- 
-
  const data= await PostModel.create({
     name:req.body.name,
     location:req.body.location,
