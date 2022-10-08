@@ -25,9 +25,8 @@ var storage = multer.diskStorage({
         cb(null, file.originalname + '-' + Date.now())
     }
 });
-  const maxSize=50*1024;
-var upload = multer({ storage: storage,
-limits:{fileSize:maxSize} });
+//   const maxSize=50*1024;
+var upload = multer({ storage: storage });
 // parse application/json
 app.use(bodyParser.json())
 const PostModel=require("./Models/post")
