@@ -1,12 +1,13 @@
 const express=require("express");
 const app=express();
+require('dotenv').config()
 const fs=require("fs")
 const path=require("path")
 const bodyParser=require("body-parser");
 const cors=require("cors")
 const mongoose=require("mongoose");
 // mongoose.connect("mongodb://localhost/instapost")
-mongoose.connect("mongodb+srv://Harsha:harsha%401234@cluster0.ohltzw6.mongodb.net/?retryWrites=true&w=majority://Harsha:harsha@1234@cluster0.ohltzw6.mongodb.net/instapost?retryWrites=true&w=majority").then(()=>{
+mongoose.connect(`mongodb+srv://Harsha:${process.env.PASSWORD}@cluster0.ohltzw6.mongodb.net/?retryWrites=true&w=majority://Harsha:harsha@1234@cluster0.ohltzw6.mongodb.net/instapost?retryWrites=true&w=majority`).then(()=>{
     console.log("connection sucess");
 }).catch((e)=>{
 console.log(e.message)
